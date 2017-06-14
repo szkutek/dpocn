@@ -6,31 +6,31 @@ import networkx as nx
 import numpy as np
 import random as rnd
 import matplotlib.pyplot as plt
-import pylab
+# import pylab
 from timeit import default_timer as timer
 
 
-def save_graph(G, pathname, i):
-    fig = pylab.figure()
-    pos = nx.spring_layout(G)
-    size = 200
-
-    green = []
-    red = []
-    for node in G.nodes():
-        if G.node[node]['vote']:
-            green.append(node)
-        else:
-            red.append(node)
-
-    nx.draw_networkx_nodes(G, pos, nodelist=green, node_color='g', node_size=size, alpha=0.8)
-    nx.draw_networkx_nodes(G, pos, nodelist=red, node_color='r', node_size=size, alpha=0.8)
-
-    nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5)
-
-    s = pathname + "_" + str(i) + ".png"
-    pylab.savefig(s)
-    pylab.close(fig)
+# def save_graph(G, pathname, i):
+#     fig = pylab.figure()
+#     pos = nx.spring_layout(G)
+#     size = 200
+#
+#     green = []
+#     red = []
+#     for node in G.nodes():
+#         if G.node[node]['vote']:
+#             green.append(node)
+#         else:
+#             red.append(node)
+#
+#     nx.draw_networkx_nodes(G, pos, nodelist=green, node_color='g', node_size=size, alpha=0.8)
+#     nx.draw_networkx_nodes(G, pos, nodelist=red, node_color='r', node_size=size, alpha=0.8)
+#
+#     nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5)
+#
+#     s = pathname + "_" + str(i) + ".png"
+#     pylab.savefig(s)
+#     pylab.close(fig)
 
 
 def new_graph(g, N):
