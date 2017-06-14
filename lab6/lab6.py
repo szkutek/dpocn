@@ -137,6 +137,7 @@ def zad4(N, MC, rep):
     for q in Q:
         single_run_WS('t', g, N, P_short, q, MC, MC2=1, show=False)
         single_run_WS('t', g, N, P_short, q, MC, MC2=rep, show=False)
+        print(timer() - start)
 
         # plt.show()
 
@@ -160,10 +161,12 @@ def final_magnetization(N, MC, rep, q):
 
 
 def zad5a(N, MC, rep):
-#    print("part 1:")
+    #    print("part 1:")
     final_magnetization(N, MC, rep, 3)
-#    print("part 2:")
+    print(timer() - start)
+    #    print("part 2:")
     final_magnetization(N, MC, rep, 4)
+    print(timer() - start)
 
 
 def zad5b(N, MC, rep):
@@ -178,6 +181,8 @@ def zad5b(N, MC, rep):
         plt.plot(P_long, m, '*-')
         leg.append('q = ' + str(q))
 
+        print(timer() - start)
+
     plt.legend(leg)
     plt.xlabel("independence probability")
     plt.ylabel("final magnetization")
@@ -185,6 +190,8 @@ def zad5b(N, MC, rep):
 
     plt.savefig("final_magn_ws001")
     plt.close()
+
+    print(timer() - start)
 
 
 def single_run_WS(plot_type, graph, N, P, q, MC, MC2=1, show=True):
@@ -221,15 +228,13 @@ if __name__ == "__main__":
     # MC = 10
     # rep = 10
 
-    # start = timer()
+    start = timer()
 
     zad4(N, MC, rep)
-	print("koniec zad 4")
-    zad5a(N, MC, rep)
-	print("koniec zad 5a")
-    zad5b(N, MC, rep)
-	print("koniec zad 5b")
+    print("koniec zad 4")
 
-    # end = timer()
-    # print(end - start)
-    # plt.show()
+    zad5a(N, MC, rep)
+    print("koniec zad 5a")
+
+    zad5b(N, MC, rep)
+    print("koniec zad 5b")
