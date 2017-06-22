@@ -52,7 +52,7 @@ def MCsimulations(g, N, P, q=3, MC=100, MC2=1):
     for p in P:
         final_magn = 0
         timeline0 = np.zeros(MC)
-        for k in range(MC2):
+        for _ in range(MC2):
             timeline = one_timeline_simulation(g, N, p, q, MC)
 
             final_magn += timeline[-1]
@@ -70,7 +70,7 @@ def one_timeline_simulation(g, N, p, q, MC):
     timeline = np.zeros(MC)
     timeline[0] = 1.
     for i in range(MC - 1):
-        for j in range(N - 1):
+        for _ in range(N - 1):
             qvoter_NNgroup(G, N, q, p, votes)
         timeline[i + 1] = qvoter_NNgroup(G, N, q, p, votes)
 
@@ -101,7 +101,7 @@ def qvoter_NNgroup(G, N, q, p, votes):  # zad1
         while i < q and first_vote == votes[subset[i]]:
             i += 1
         if i == q:
-            votes[voter] = votes[first_vote]
+            votes[voter] = first_vote
 
     return sum(votes) / N  # magnetization(N, votes)
 
@@ -137,14 +137,14 @@ def zad4(N, MC, rep):
     for q in Q:
         single_run_WS('t', g, N, P_short, q, MC, MC2=1, show=False)
         single_run_WS('t', g, N, P_short, q, MC, MC2=rep, show=False)
-        print(timer() - start)
+        # print(timer() - start)
 
         # plt.show()
 
 
 def final_magnetization(N, MC, rep, q):
     # TODO ustawic wiecej p w P
-    P_long = np.arange(0.0, 0.5, 0.02)
+    P_long = np.arange(0.1, 0.5, 0.02)
 
     # PART 1
     G = ['complete', 'ba', 'ws1', 'ws2']
@@ -152,7 +152,7 @@ def final_magnetization(N, MC, rep, q):
     for g in G:
         m, t = MCsimulations(g, N, P_long, q, MC=MC, MC2=rep)
         plt.plot(P_long, m, '-')
-    plt.legend(['complete', 'BA(100,4)', 'WS(100,4,0.01)', 'WS(100,4,0.2)'])
+    plt.legend(['complete graph', 'BA(100,4)', 'WS(100,4,0.01)', 'WS(100,4,0.2)'])
     plt.xlabel("independence probability")
     plt.ylabel("final magnetization")
     plt.title("Final magnetization for different topologies with q=" + str(q))
@@ -161,17 +161,17 @@ def final_magnetization(N, MC, rep, q):
 
 
 def zad5a(N, MC, rep):
-    #    print("part 1:")
+    print("part 1:")
     final_magnetization(N, MC, rep, 3)
     print(timer() - start)
-    #    print("part 2:")
+    print("part 2:")
     final_magnetization(N, MC, rep, 4)
     print(timer() - start)
 
 
 def zad5b(N, MC, rep):
     # TODO ustawic wiecej p w P
-    P_long = np.arange(0.0, 0.5, 0.02)
+    P_long = np.arange(0.1, 0.5, 0.02)
     Q = [3, 4]
 
     plt.figure()
@@ -220,17 +220,18 @@ def single_run_WS(plot_type, graph, N, P, q, MC, MC2=1, show=True):
 
 
 if __name__ == "__main__":
-    N = 100
-    MC = 1000
-    rep = 100
+    # N = 100
+    # MC = 1000
+    # rep = 100
 
-    # N = 10
-    # MC = 10
-    # rep = 10
+    N = 100
+    MC = 10
+    rep = 10
 
     start = timer()
 
     zad4(N, MC, rep)
+    print(timer() - start)
     print("koniec zad 4")
 
     zad5a(N, MC, rep)
